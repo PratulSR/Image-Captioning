@@ -51,3 +51,30 @@ This project demonstrates:
 - AWS CLI configured (<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html">installation guide</a>)  
 - Git installed locally  
 - A Gemini API key for image annotation
+
+## Deployment
+
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your-username/scalable-image-annotation-app.git
+   cd scalable-image-annotation-app
+   ```
+2. **Customize parameters**
+   Edit infrastructure/template.yaml to configure:
+
+- KeyName (your EC2 SSH key pair)
+- MyIP (your CIDR block for SSH)
+- LambdaRoleArn (IAM role ARN for the Lambda functions)
+- GEMINI_API_KEY (your Gemini API key)
+   
+3. **Deploy with CloudFormation**
+   ```bash
+   aws cloudformation deploy \
+   --template-file infrastructure/template.yaml \
+   --stack-name image-annotation-app \
+   --capabilities CAPABILITY_NAMED_IAM
+   ```
+
+4. **Retrieve the URL**
+
+   After deployment completes, note the LoadBalancerDNSName output from the CloudFormation stack. Open that address in your browser to access the live application.
